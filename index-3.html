@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Pizza Place Nakur | Order Online</title>
+<meta name="description" content="Pizza Place Nakur — pizza, burger, fries, drinks and combos. Order online.">
+<style>
+:root{--red:#e21b23;--yellow:#ffc400;--dark:#090909;--card:#151515;--muted:#aaa;--white:#fff}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial;background:#080808;color:var(--white)}
+a{text-decoration:none;color:inherit}.container{width:min(1120px,92%);margin:auto}
+header{position:sticky;top:0;z-index:20;background:rgba(8,8,8,.88);backdrop-filter:blur(12px);border-bottom:1px solid #272727}
+.nav{height:72px;display:flex;align-items:center;justify-content:space-between}.brand{font-weight:900;font-size:23px}.brand span{color:var(--red)}.navlinks{display:flex;gap:24px;color:#ddd;font-size:14px}.navlinks a:hover{color:var(--yellow)}
+.btn{display:inline-flex;align-items:center;justify-content:center;border:0;border-radius:12px;padding:12px 18px;font-weight:800;cursor:pointer}.btn-red{background:var(--red);color:white}.btn-yellow{background:var(--yellow);color:#111}.btn-dark{background:#202020;color:white;border:1px solid #333}
+.hero{padding:64px 0 46px;background:radial-gradient(circle at 75% 20%,#5d1518 0,#180909 30%,#080808 65%)}
+.hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:42px;align-items:center}.eyebrow{color:var(--yellow);font-weight:900;letter-spacing:2px;text-transform:uppercase;font-size:12px}.hero h1{font-size:clamp(44px,7vw,82px);line-height:.95;margin:15px 0}.hero h1 span{color:var(--red)}.hero p{color:#c8c8c8;max-width:560px;font-size:18px;line-height:1.6}.hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:24px}.hero-photo{height:500px;border-radius:28px;overflow:hidden;border:1px solid #333;box-shadow:0 25px 80px rgba(226,27,35,.18)}.hero-photo img{width:100%;height:100%;object-fit:cover}
+section{padding:70px 0}.section-head{display:flex;justify-content:space-between;gap:20px;align-items:end;margin-bottom:26px}.section-head h2{font-size:38px;margin:0}.section-head p{color:var(--muted);margin:0}.menu{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.item{background:linear-gradient(180deg,#191919,#101010);border:1px solid #2b2b2b;border-radius:20px;overflow:hidden}.item img{width:100%;height:210px;object-fit:cover}.item-body{padding:18px}.item h3{margin:0 0 7px;font-size:21px}.item p{margin:0;color:#aaa;min-height:42px;font-size:14px}.row{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:15px}.price{font-size:22px;font-weight:900;color:var(--yellow)}
+.gallery{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.gallery img{width:100%;height:230px;object-fit:cover;border-radius:16px;border:1px solid #2b2b2b}
+.order-wrap{display:grid;grid-template-columns:.9fr 1.1fr;gap:22px;align-items:start}.panel{background:#111;border:1px solid #2b2b2b;border-radius:22px;padding:24px}.panel h3{margin-top:0;font-size:25px}.cart-line{display:flex;justify-content:space-between;border-bottom:1px solid #2a2a2a;padding:12px 0;color:#ddd}.cart-empty{color:#888}.total{display:flex;justify-content:space-between;font-size:22px;font-weight:900;padding-top:18px}.form{display:grid;gap:13px}.form input,.form textarea,.form select{width:100%;padding:14px;border-radius:12px;border:1px solid #333;background:#1a1a1a;color:white;outline:none}.form textarea{min-height:95px;resize:vertical}.form label{font-size:13px;color:#bbb}.note{font-size:12px;color:#888;line-height:1.5}
+footer{padding:35px 0;border-top:1px solid #242424;color:#999;text-align:center}.floating{position:fixed;right:18px;bottom:18px;z-index:30}
+.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:#fff;color:#111;padding:12px 18px;border-radius:12px;font-weight:800;display:none;z-index:50}
+@media(max-width:850px){.hero-grid,.order-wrap{grid-template-columns:1fr}.hero-photo{height:390px}.menu{grid-template-columns:repeat(2,1fr)}.gallery{grid-template-columns:repeat(2,1fr)}.navlinks{display:none}}
+@media(max-width:560px){.menu{grid-template-columns:1fr}.gallery{grid-template-columns:1fr 1fr}.gallery img{height:160px}.hero{padding-top:38px}.hero h1{font-size:50px}}
+</style>
+</head>
+<body>
+<header><div class="container nav">
+  <a class="brand" href="#">PIZZA <span>PLACE</span> NAKUR</a>
+  <nav class="navlinks"><a href="#menu">Menu</a><a href="#gallery">Gallery</a><a href="#order">Order</a></nav>
+  <a class="btn btn-red" href="#order">Order Now</a>
+</div></header>
+
+<main>
+<section class="hero"><div class="container hero-grid">
+  <div>
+    <div class="eyebrow">Pizza • Pasta • Burger • Shake & More</div>
+    <h1>Good Food.<br><span>Good Mood.</span></h1>
+    <p>Welcome to Pizza Place Nakur. Choose your favourites, add them to your cart and send your complete order directly to the shop.</p>
+    <div class="hero-actions"><a class="btn btn-yellow" href="#menu">Explore Menu</a><a class="btn btn-dark" href="#order">Place Order</a></div>
+  </div>
+  <div class="hero-photo"><img src="assets/photo-1.png" alt="Pizza Place Nakur interior"></div>
+</div></section>
+
+<section id="menu"><div class="container">
+  <div class="section-head"><div><h2>Popular Menu</h2><p>Demo prices — update these with the shop's final menu.</p></div></div>
+  <div class="menu" id="menuGrid"></div>
+</div></section>
+
+<section id="gallery"><div class="container">
+  <div class="section-head"><div><h2>Pizza Place</h2><p>A quick look at the store and food.</p></div></div>
+  <div class="gallery">
+    <img src="assets/photo-2.png" alt="Pizza Place billboard">
+    <img src="assets/photo-3.png" alt="Pizza Place storefront">
+    <img src="assets/photo-4.png" alt="Pizza Place interior">
+    <img src="assets/photo-5.png" alt="Pizza Burger Fries Coke combo">
+  </div>
+</div></section>
+
+<section id="order"><div class="container">
+  <div class="section-head"><div><h2>Place Your Order</h2><p>Fill your details and send the order to Pizza Place.</p></div></div>
+  <div class="order-wrap">
+    <div class="panel"><h3>Your Cart</h3><div id="cart"><div class="cart-empty">No items added yet.</div></div><div class="total"><span>Total</span><span id="total">₹0</span></div></div>
+    <div class="panel"><h3>Customer Details</h3>
+      <form class="form" id="orderForm">
+        <div><label>Name</label><input id="name" required placeholder="Your name"></div>
+        <div><label>Mobile Number</label><input id="phone" required inputmode="tel" placeholder="10-digit mobile number"></div>
+        <div><label>Order Type</label><select id="type"><option>Home Delivery</option><option>Pickup</option></select></div>
+        <div><label>Address</label><textarea id="address" required placeholder="Full delivery address"></textarea></div>
+        <div><label>Extra Instructions</label><textarea id="note" placeholder="Less spicy, extra cheese, etc."></textarea></div>
+        <button class="btn btn-red" type="submit">Send Order on WhatsApp</button>
+        <div class="note">This demo sends the order summary to the shop's WhatsApp number. For a full admin dashboard, database, payment gateway and live order status, connect a backend.</div>
+      </form>
+    </div>
+  </div>
+</div></section>
+</main>
+
+<a class="btn btn-yellow floating" href="#order">🛒 Cart <span id="count" style="margin-left:6px">0</span></a>
+<footer><div class="container">© 2026 Pizza Place Nakur • Order online</div></footer>
+<div class="toast" id="toast">Added to cart</div>
+
+<script>
+const SHOP_WHATSAPP="919045190526"; // Shop number from the provided poster
+const menu=[
+ {id:1,name:"Pizza",price:69,desc:"Fresh cheesy pizza with veg toppings.",img:"assets/photo-5.png"},
+ {id:2,name:"Burger",price:49,desc:"Crispy veg burger with fresh salad.",img:"assets/photo-5.png"},
+ {id:3,name:"Pizza Burger Fries Coke Combo",price:149,desc:"Pizza + burger + fries + Coke combo.",img:"assets/photo-5.png"},
+ {id:4,name:"French Fries",price:59,desc:"Crispy golden fries.",img:"assets/photo-5.png"},
+ {id:5,name:"Cold Drink",price:40,desc:"Chilled soft drink.",img:"assets/photo-5.png"},
+ {id:6,name:"Special Combo",price:199,desc:"A larger combo for sharing.",img:"assets/photo-5.png"}
+];
+let cart=[];
+const money=n=>"₹"+n;
+function renderMenu(){
+ document.getElementById("menuGrid").innerHTML=menu.map(x=>`<article class="item"><img src="${x.img}" alt="${x.name}"><div class="item-body"><h3>${x.name}</h3><p>${x.desc}</p><div class="row"><span class="price">${money(x.price)}</span><button class="btn btn-yellow" onclick="add(${x.id})">Add +</button></div></div></article>`).join("");
+}
+function add(id){
+ const p=menu.find(x=>x.id===id); const found=cart.find(x=>x.id===id);
+ if(found) found.qty++; else cart.push({...p,qty:1});
+ renderCart(); toast("Added to cart");
+}
+function renderCart(){
+ const el=document.getElementById("cart");
+ if(!cart.length) el.innerHTML='<div class="cart-empty">No items added yet.</div>';
+ else el.innerHTML=cart.map(x=>`<div class="cart-line"><span>${x.name} × ${x.qty}</span><span>${money(x.price*x.qty)} <button class="btn btn-dark" style="padding:5px 9px;margin-left:5px" onclick="removeItem(${x.id})">−</button></span></div>`).join("");
+ const total=cart.reduce((s,x)=>s+x.price*x.qty,0);
+ document.getElementById("total").textContent=money(total);
+ document.getElementById("count").textContent=cart.reduce((s,x)=>s+x.qty,0);
+}
+function removeItem(id){const x=cart.find(x=>x.id===id);if(!x)return;x.qty--;if(x.qty<=0)cart=cart.filter(y=>y.id!==id);renderCart();}
+function toast(t){const e=document.getElementById("toast");e.textContent=t;e.style.display="block";setTimeout(()=>e.style.display="none",1000)}
+document.getElementById("orderForm").addEventListener("submit",e=>{
+ e.preventDefault();
+ if(!cart.length){alert("Please add at least one item.");return;}
+ const name=document.getElementById("name").value.trim();
+ const phone=document.getElementById("phone").value.trim();
+ const type=document.getElementById("type").value;
+ const address=document.getElementById("address").value.trim();
+ const note=document.getElementById("note").value.trim();
+ const total=cart.reduce((s,x)=>s+x.price*x.qty,0);
+ let lines=cart.map(x=>`• ${x.name} x${x.qty} = ${money(x.price*x.qty)}`).join("\n");
+ const msg=`*NEW ORDER - PIZZA PLACE NAKUR*%0A%0A*Customer:* ${encodeURIComponent(name)}%0A*Mobile:* ${encodeURIComponent(phone)}%0A*Type:* ${encodeURIComponent(type)}%0A*Address:* ${encodeURIComponent(address)}%0A%0A*Items:*%0A${encodeURIComponent(lines)}%0A%0A*Total:* ${money(total)}%0A*Instructions:* ${encodeURIComponent(note||"None")}`;
+ window.open(`https://wa.me/${SHOP_WHATSAPP}?text=${msg}`,"_blank");
+});
+renderMenu();renderCart();
+</script>
+</body>
+</html>
