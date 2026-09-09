@@ -1,0 +1,905 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Pizza Place Nakur | Order Online</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, sans-serif;
+}
+
+body{
+    background:#080808;
+    color:white;
+}
+
+/* HEADER */
+header{
+    position:sticky;
+    top:0;
+    z-index:1000;
+    background:rgba(10,10,10,.96);
+    border-bottom:1px solid #292929;
+    padding:15px 5%;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.logo{
+    font-size:25px;
+    font-weight:900;
+    color:white;
+}
+
+.logo span{
+    color:#ffcc00;
+}
+
+.cart-btn{
+    background:#ffcc00;
+    color:#000;
+    border:none;
+    padding:11px 18px;
+    border-radius:25px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+/* HERO */
+.hero{
+    min-height:600px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding:50px 20px;
+    background:
+    linear-gradient(rgba(0,0,0,.48),rgba(0,0,0,.75)),
+    url("1788945990793.png") center/cover;
+}
+
+.hero-content{
+    max-width:850px;
+}
+
+.hero h1{
+    font-size:clamp(42px,8vw,80px);
+    font-weight:900;
+    line-height:1;
+    text-shadow:0 4px 20px #000;
+}
+
+.hero h1 span{
+    color:#ffcc00;
+}
+
+.hero p{
+    margin:20px 0;
+    font-size:20px;
+}
+
+.order-now{
+    display:inline-block;
+    background:#ffcc00;
+    color:#000;
+    padding:15px 30px;
+    border-radius:30px;
+    font-weight:bold;
+    text-decoration:none;
+}
+
+/* INFO */
+.info{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:15px;
+    padding:30px 5%;
+    background:#111;
+    text-align:center;
+}
+
+.info-box{
+    padding:20px;
+    border:1px solid #333;
+    border-radius:15px;
+}
+
+.info-box h3{
+    color:#ffcc00;
+    margin-bottom:7px;
+}
+
+/* MENU */
+.menu{
+    padding:55px 5%;
+}
+
+.section-title{
+    text-align:center;
+    margin-bottom:35px;
+}
+
+.section-title h2{
+    font-size:38px;
+}
+
+.section-title span{
+    color:#ffcc00;
+}
+
+.products{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+    gap:25px;
+}
+
+.card{
+    background:#151515;
+    border:1px solid #292929;
+    border-radius:18px;
+    overflow:hidden;
+    transition:.3s;
+}
+
+.card:hover{
+    transform:translateY(-6px);
+    border-color:#ffcc00;
+}
+
+.card img{
+    width:100%;
+    height:210px;
+    object-fit:cover;
+}
+
+.card-content{
+    padding:18px;
+}
+
+.card h3{
+    font-size:22px;
+    margin-bottom:7px;
+}
+
+.card p{
+    color:#aaa;
+    font-size:14px;
+    min-height:38px;
+}
+
+.price{
+    color:#ffcc00;
+    font-size:23px;
+    font-weight:bold;
+    margin:12px 0;
+}
+
+.add{
+    width:100%;
+    border:none;
+    background:#ffcc00;
+    color:#000;
+    padding:12px;
+    border-radius:9px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+/* OFFER */
+.offer{
+    margin:20px 5% 50px;
+    padding:35px 20px;
+    border-radius:20px;
+    text-align:center;
+    background:linear-gradient(135deg,#5d0000,#160000);
+    border:1px solid #ffcc00;
+}
+
+.offer h2{
+    font-size:32px;
+    color:#ffcc00;
+}
+
+.offer p{
+    margin-top:10px;
+}
+
+/* CART */
+.cart{
+    position:fixed;
+    right:-450px;
+    top:0;
+    width:min(420px,100%);
+    height:100vh;
+    background:#111;
+    z-index:2000;
+    padding:25px;
+    box-shadow:-5px 0 25px #000;
+    transition:.35s;
+    overflow-y:auto;
+}
+
+.cart.active{
+    right:0;
+}
+
+.cart-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:20px;
+}
+
+.close{
+    background:none;
+    color:white;
+    border:none;
+    font-size:30px;
+    cursor:pointer;
+}
+
+.cart-item{
+    display:flex;
+    justify-content:space-between;
+    gap:10px;
+    padding:14px 0;
+    border-bottom:1px solid #333;
+}
+
+.qty button{
+    background:#ffcc00;
+    border:none;
+    width:25px;
+    height:25px;
+    border-radius:5px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.total{
+    font-size:24px;
+    font-weight:bold;
+    color:#ffcc00;
+    margin:25px 0;
+}
+
+/* FORM */
+.form input,
+.form textarea{
+    width:100%;
+    margin-bottom:12px;
+    padding:13px;
+    background:#1d1d1d;
+    color:white;
+    border:1px solid #444;
+    border-radius:8px;
+    outline:none;
+}
+
+.form textarea{
+    min-height:80px;
+    resize:none;
+}
+
+.whatsapp{
+    width:100%;
+    background:#25D366;
+    color:white;
+    border:none;
+    padding:15px;
+    border-radius:10px;
+    font-size:17px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+/* FOOTER */
+footer{
+    text-align:center;
+    padding:35px 20px;
+    background:#050505;
+    border-top:1px solid #222;
+}
+
+footer h2{
+    color:#ffcc00;
+    margin-bottom:10px;
+}
+
+footer p{
+    color:#999;
+    margin:5px;
+}
+
+/* MOBILE */
+@media(max-width:700px){
+    .info{
+        grid-template-columns:1fr;
+    }
+
+    .hero{
+        min-height:520px;
+    }
+
+    .hero p{
+        font-size:16px;
+    }
+
+    .menu{
+        padding:40px 15px;
+    }
+
+    .products{
+        grid-template-columns:repeat(2,1fr);
+        gap:12px;
+    }
+
+    .card img{
+        height:150px;
+    }
+
+    .card-content{
+        padding:12px;
+    }
+
+    .card h3{
+        font-size:17px;
+    }
+
+    .price{
+        font-size:19px;
+    }
+}
+
+@media(max-width:420px){
+    .products{
+        grid-template-columns:1fr;
+    }
+
+    .card img{
+        height:210px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+<header>
+    <div class="logo">🍕 Pizza <span>Place</span></div>
+
+    <button class="cart-btn" onclick="openCart()">
+        🛒 Cart (<span id="cartCount">0</span>)
+    </button>
+</header>
+
+
+<!-- HERO -->
+<section class="hero">
+
+    <div class="hero-content">
+
+        <h1>
+            Pizza <span>Place</span>
+        </h1>
+
+        <p>
+            Pizza • Pasta • Burger • Fries • Shake & More
+        </p>
+
+        <p>
+            ❤️ I Love Nakur
+        </p>
+
+        <a href="#menu" class="order-now">
+            ORDER NOW 🍕
+        </a>
+
+    </div>
+
+</section>
+
+
+<!-- INFO -->
+<section class="info">
+
+    <div class="info-box">
+        <h3>🔥 Fresh Food</h3>
+        <p>Freshly prepared with quality ingredients.</p>
+    </div>
+
+    <div class="info-box">
+        <h3>🚚 Easy Ordering</h3>
+        <p>Order online directly from Pizza Place.</p>
+    </div>
+
+    <div class="info-box">
+        <h3>📞 Contact</h3>
+        <p>9045190526</p>
+    </div>
+
+</section>
+
+
+<!-- MENU -->
+<section class="menu" id="menu">
+
+    <div class="section-title">
+        <h2>Our <span>Menu</span></h2>
+        <p>Choose your favourite food</p>
+    </div>
+
+    <div class="products">
+
+
+        <!-- PRODUCT 1 -->
+        <div class="card">
+
+            <img src="1788945924352.png" alt="Pizza">
+
+            <div class="card-content">
+
+                <h3>Classic Pizza</h3>
+
+                <p>
+                    Delicious cheesy pizza with fresh toppings.
+                </p>
+
+                <div class="price">₹69</div>
+
+                <button class="add"
+                onclick="addToCart('Classic Pizza',69)">
+                    ADD TO CART
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- PRODUCT 2 -->
+        <div class="card">
+
+            <img src="1788945942349.png" alt="Burger">
+
+            <div class="card-content">
+
+                <h3>Veg Burger</h3>
+
+                <p>
+                    Juicy crispy burger with fresh vegetables.
+                </p>
+
+                <div class="price">₹49</div>
+
+                <button class="add"
+                onclick="addToCart('Veg Burger',49)">
+                    ADD TO CART
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- PRODUCT 3 -->
+        <div class="card">
+
+            <img src="1788945969245.png" alt="Pizza Place">
+
+            <div class="card-content">
+
+                <h3>Pizza Place Special</h3>
+
+                <p>
+                    Our special food selection made fresh.
+                </p>
+
+                <div class="price">₹99</div>
+
+                <button class="add"
+                onclick="addToCart('Pizza Place Special',99)">
+                    ADD TO CART
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- PRODUCT 4 -->
+        <div class="card">
+
+            <img src="1788945990793.png" alt="Combo">
+
+            <div class="card-content">
+
+                <h3>Pizza Burger Fries Combo</h3>
+
+                <p>
+                    Pizza, burger and crispy fries combo.
+                </p>
+
+                <div class="price">₹149</div>
+
+                <button class="add"
+                onclick="addToCart('Pizza Burger Fries Combo',149)">
+                    ADD TO CART
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- OFFER -->
+<section class="offer">
+
+    <h2>🍕 Special Combo</h2>
+
+    <p>
+        Pizza + Burger + Fries + Coke
+    </p>
+
+    <h2>Only ₹149</h2>
+
+</section>
+
+
+<!-- CART -->
+<div class="cart" id="cart">
+
+    <div class="cart-header">
+
+        <h2>Your Order 🛒</h2>
+
+        <button class="close"
+        onclick="closeCart()">×</button>
+
+    </div>
+
+
+    <div id="cartItems">
+
+        <p style="color:#999">
+            Your cart is empty.
+        </p>
+
+    </div>
+
+
+    <div class="total">
+        Total: ₹<span id="total">0</span>
+    </div>
+
+
+    <!-- CUSTOMER DETAILS -->
+    <div class="form">
+
+        <input
+        type="text"
+        id="name"
+        placeholder="Customer Name"
+        required>
+
+        <input
+        type="tel"
+        id="phone"
+        placeholder="Mobile Number"
+        required>
+
+        <textarea
+        id="address"
+        placeholder="Delivery Address"
+        required></textarea>
+
+        <button
+        class="whatsapp"
+        onclick="sendOrder()">
+
+        📲 PLACE ORDER ON WHATSAPP
+
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- FOOTER -->
+<footer>
+
+    <h2>Pizza Place</h2>
+
+    <p>Pizza • Pasta • Burger • Shake & More</p>
+
+    <p>📍 Nakur, Uttar Pradesh</p>
+
+    <p>📞 9045190526</p>
+
+    <p style="margin-top:15px;">
+        © 2026 Pizza Place. All Rights Reserved.
+    </p>
+
+</footer>
+
+
+<script>
+
+/* CART DATA */
+
+let cart = [];
+
+
+/* ADD TO CART */
+
+function addToCart(name, price){
+
+    let existing = cart.find(item => item.name === name);
+
+    if(existing){
+
+        existing.qty++;
+
+    }else{
+
+        cart.push({
+            name:name,
+            price:price,
+            qty:1
+        });
+
+    }
+
+    updateCart();
+
+    openCart();
+}
+
+
+/* UPDATE CART */
+
+function updateCart(){
+
+    let container =
+    document.getElementById("cartItems");
+
+    let count = 0;
+    let total = 0;
+
+    container.innerHTML = "";
+
+    if(cart.length === 0){
+
+        container.innerHTML =
+        '<p style="color:#999">Your cart is empty.</p>';
+
+    }
+
+
+    cart.forEach((item,index)=>{
+
+        count += item.qty;
+
+        total += item.price * item.qty;
+
+
+        let div =
+        document.createElement("div");
+
+        div.className = "cart-item";
+
+
+        div.innerHTML = `
+
+            <div>
+
+                <strong>${item.name}</strong>
+
+                <br>
+
+                <span style="color:#ffcc00">
+                    ₹${item.price} × ${item.qty}
+                </span>
+
+            </div>
+
+            <div class="qty">
+
+                <button onclick="changeQty(${index},-1)">
+                    -
+                </button>
+
+                <span style="padding:0 7px">
+                    ${item.qty}
+                </span>
+
+                <button onclick="changeQty(${index},1)">
+                    +
+                </button>
+
+            </div>
+
+        `;
+
+
+        container.appendChild(div);
+
+    });
+
+
+    document.getElementById("cartCount").innerText =
+    count;
+
+    document.getElementById("total").innerText =
+    total;
+
+}
+
+
+/* CHANGE QUANTITY */
+
+function changeQty(index,change){
+
+    cart[index].qty += change;
+
+
+    if(cart[index].qty <= 0){
+
+        cart.splice(index,1);
+
+    }
+
+
+    updateCart();
+
+}
+
+
+/* OPEN CART */
+
+function openCart(){
+
+    document
+    .getElementById("cart")
+    .classList.add("active");
+
+}
+
+
+/* CLOSE CART */
+
+function closeCart(){
+
+    document
+    .getElementById("cart")
+    .classList.remove("active");
+
+}
+
+
+/* SEND ORDER TO WHATSAPP */
+
+function sendOrder(){
+
+    if(cart.length === 0){
+
+        alert("Please add products to cart first.");
+
+        return;
+
+    }
+
+
+    let name =
+    document.getElementById("name").value.trim();
+
+    let phone =
+    document.getElementById("phone").value.trim();
+
+    let address =
+    document.getElementById("address").value.trim();
+
+
+    if(!name || !phone || !address){
+
+        alert(
+        "Please fill your Name, Mobile Number and Address."
+        );
+
+        return;
+
+    }
+
+
+    let message =
+    "🍕 *NEW ORDER - PIZZA PLACE*%0A";
+
+    message +=
+    "━━━━━━━━━━━━━━━━%0A";
+
+    message +=
+    "👤 *Customer:* " + name + "%0A";
+
+    message +=
+    "📞 *Mobile:* " + phone + "%0A";
+
+    message +=
+    "📍 *Address:* " + address + "%0A%0A";
+
+
+    message +=
+    "🛒 *ORDER DETAILS*%0A";
+
+
+    let total = 0;
+
+
+    cart.forEach(item=>{
+
+        let itemTotal =
+        item.price * item.qty;
+
+        total += itemTotal;
+
+
+        message +=
+        "• " +
+        item.name +
+        " × " +
+        item.qty +
+        " = ₹" +
+        itemTotal +
+        "%0A";
+
+    });
+
+
+    message +=
+    "%0A💰 *TOTAL: ₹" +
+    total +
+    "*%0A";
+
+    message +=
+    "━━━━━━━━━━━━━━━━%0A";
+
+    message +=
+    "Thank you! ❤️";
+
+
+    /*
+       Pizza Place WhatsApp Number
+       9045190526
+    */
+
+    let whatsappNumber =
+    "919045190526";
+
+
+    let url =
+    "https://wa.me/" +
+    whatsappNumber +
+    "?text=" +
+    message;
+
+
+    window.open(url,"_blank");
+
+}
+
+</script>
+
+</body>
+  </html>
