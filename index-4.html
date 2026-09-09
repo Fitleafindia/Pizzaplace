@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pizza Place Nakur | Order Online</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Arial,Helvetica,sans-serif;background:#080808;color:#fff}
+header{position:sticky;top:0;z-index:99;background:#090909ee;border-bottom:1px solid #292929}
+.nav{max-width:1150px;margin:auto;padding:16px 20px;display:flex;align-items:center;justify-content:space-between}
+.logo{font-size:25px;font-weight:900}.logo b{color:#e31b23}
+.nav a{color:#fff;text-decoration:none;margin-left:22px;font-weight:700}
+.btn{border:0;border-radius:10px;padding:12px 18px;font-weight:800;cursor:pointer}
+.red{background:#e31b23;color:white}.yellow{background:#ffc400;color:#111}
+.hero{min-height:650px;display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:40px;max-width:1150px;margin:auto;padding:55px 20px}
+.hero h1{font-size:clamp(45px,7vw,82px);line-height:.95}.hero h1 span{color:#e31b23}
+.hero p{color:#bbb;font-size:18px;line-height:1.6;margin:22px 0}
+.hero-img{width:100%;height:500px;object-fit:cover;border-radius:25px;border:2px solid #333}
+section{padding:70px 20px}.wrap{max-width:1150px;margin:auto}
+.title{font-size:40px;margin-bottom:10px}.sub{color:#999;margin-bottom:28px}
+.menu{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.card{background:#151515;border:1px solid #303030;border-radius:18px;overflow:hidden}
+.card img{width:100%;height:220px;object-fit:cover}.card-body{padding:18px}
+.card h3{font-size:21px;margin-bottom:8px}.desc{color:#aaa;min-height:42px;font-size:14px}
+.row{display:flex;justify-content:space-between;align-items:center;margin-top:15px}
+.price{font-size:22px;color:#ffc400;font-weight:900}
+.gallery{display:grid;grid-template-columns:repeat(4,1fr);gap:15px}
+.gallery img{width:100%;height:240px;object-fit:cover;border-radius:16px;border:1px solid #333}
+.order-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+.box{background:#121212;border:1px solid #303030;border-radius:20px;padding:24px}
+.box h3{font-size:25px;margin-bottom:18px}
+.cart-item{display:flex;justify-content:space-between;padding:12px 0;border-bottom:1px solid #292929}
+.total{display:flex;justify-content:space-between;font-size:23px;font-weight:900;margin-top:18px}
+input,textarea,select{width:100%;background:#1c1c1c;color:#fff;border:1px solid #393939;border-radius:10px;padding:14px;margin:6px 0 13px}
+textarea{height:100px;resize:vertical}
+label{font-size:13px;color:#bbb}
+footer{text-align:center;border-top:1px solid #292929;padding:30px;color:#888}
+@media(max-width:800px){
+ .hero,.order-grid{grid-template-columns:1fr}.hero-img{height:380px}.menu{grid-template-columns:1fr 1fr}.gallery{grid-template-columns:1fr 1fr}
+}
+@media(max-width:520px){
+ .nav-links{display:none}.menu{grid-template-columns:1fr}.gallery img{height:190px}.hero{padding-top:35px}
+}
+</style>
+</head>
+<body>
+
+<header>
+<div class="nav">
+  <div class="logo">PIZZA <b>PLACE</b> NAKUR</div>
+  <div class="nav-links">
+    <a href="#menu">Menu</a>
+    <a href="#gallery">Gallery</a>
+    <a href="#order">Order</a>
+  </div>
+  <a class="btn red" href="#order">Order Now</a>
+</div>
+</header>
+
+<section class="hero">
+<div>
+  <div style="color:#ffc400;font-weight:900;letter-spacing:2px">PIZZA • BURGER • FRIES • MORE</div>
+  <h1 style="margin-top:15px">Good Food.<br><span>Good Mood.</span></h1>
+  <p>Welcome to Pizza Place Nakur. Browse our menu, add your favourite items to the cart and send your complete order directly to the shop.</p>
+  <a class="btn yellow" href="#menu">Explore Menu</a>
+</div>
+<img class="hero-img" src="1788945924352.png" alt="Pizza Place Nakur">
+</section>
+
+<section id="menu">
+<div class="wrap">
+<h2 class="title">Popular Menu</h2>
+<p class="sub">Choose your favourite food and add it to your cart.</p>
+<div class="menu" id="menuList"></div>
+</div>
+</section>
+
+<section id="gallery">
+<div class="wrap">
+<h2 class="title">Pizza Place Nakur</h2>
+<p class="sub">Our restaurant and food.</p>
+<div class="gallery">
+<img src="1788945924352.png" alt="Pizza Place">
+<img src="1788945942349.png" alt="Pizza Place">
+<img src="1788945969245.png" alt="Pizza Place">
+<img src="1788945990793.png" alt="Pizza Place">
+</div>
+</div>
+</section>
+
+<section id="order">
+<div class="wrap">
+<h2 class="title">Place Your Order</h2>
+<p class="sub">Enter customer details and send the order to WhatsApp.</p>
+<div class="order-grid">
+<div class="box">
+<h3>Your Cart</h3>
+<div id="cart"><p style="color:#888">No items added yet.</p></div>
+<div class="total"><span>Total</span><span id="total">₹0</span></div>
+</div>
+
+<div class="box">
+<h3>Customer Details</h3>
+<form id="orderForm">
+<label>Name</label>
+<input id="name" required placeholder="Customer name">
+
+<label>Mobile Number</label>
+<input id="phone" required inputmode="numeric" placeholder="10 digit mobile number">
+
+<label>Order Type</label>
+<select id="orderType">
+<option>Home Delivery</option>
+<option>Pickup</option>
+</select>
+
+<label>Address</label>
+<textarea id="address" required placeholder="Full delivery address"></textarea>
+
+<label>Extra Instructions</label>
+<textarea id="notes" placeholder="Less spicy, extra cheese, etc."></textarea>
+
+<button class="btn red" style="width:100%" type="submit">Send Order on WhatsApp</button>
+</form>
+</div>
+</div>
+</div>
+</section>
+
+<footer>© 2026 Pizza Place Nakur • Online Ordering</footer>
+
+<script>
+const SHOP_NUMBER="919045190526";
+
+const products=[
+ {id:1,name:"Pizza",price:69,img:"1788945969245.png",desc:"Fresh cheesy veg pizza."},
+ {id:2,name:"Burger",price:49,img:"1788945990793.png",desc:"Crispy and tasty veg burger."},
+ {id:3,name:"Pizza Burger Fries Coke Combo",price:149,img:"file_0000000002808.png",desc:"Pizza + Burger + Fries + Coke."},
+ {id:4,name:"French Fries",price:59,img:"file_0000000002808.png",desc:"Crispy golden fries."},
+ {id:5,name:"Cold Drink",price:40,img:"file_0000000002808.png",desc:"Chilled soft drink."},
+ {id:6,name:"Special Combo",price:199,img:"file_0000000002808.png",desc:"Special sharing combo."}
+];
+
+let cart=[];
+
+function money(n){return "₹"+n}
+
+function showMenu(){
+ document.getElementById("menuList").innerHTML=products.map(p=>`
+ <div class="card">
+   <img src="${p.img}" alt="${p.name}">
+   <div class="card-body">
+     <h3>${p.name}</h3>
+     <div class="desc">${p.desc}</div>
+     <div class="row">
+       <span class="price">${money(p.price)}</span>
+       <button class="btn yellow" onclick="addToCart(${p.id})">Add +</button>
+     </div>
+   </div>
+ </div>`).join("");
+}
+
+function addToCart(id){
+ const p=products.find(x=>x.id===id);
+ const old=cart.find(x=>x.id===id);
+ if(old) old.qty++;
+ else cart.push({...p,qty:1});
+ renderCart();
+}
+
+function removeFromCart(id){
+ const item=cart.find(x=>x.id===id);
+ if(!item)return;
+ item.qty--;
+ if(item.qty<=0) cart=cart.filter(x=>x.id!==id);
+ renderCart();
+}
+
+function renderCart(){
+ const el=document.getElementById("cart");
+ if(!cart.length){
+   el.innerHTML='<p style="color:#888">No items added yet.</p>';
+ }else{
+   el.innerHTML=cart.map(x=>`
+   <div class="cart-item">
+     <span>${x.name} × ${x.qty}</span>
+     <span>${money(x.price*x.qty)}
+       <button class="btn" style="padding:5px 9px;background:#333;color:#fff" onclick="removeFromCart(${x.id})">−</button>
+     </span>
+   </div>`).join("");
+ }
+ const total=cart.reduce((sum,x)=>sum+x.price*x.qty,0);
+ document.getElementById("total").textContent=money(total);
+}
+
+document.getElementById("orderForm").addEventListener("submit",function(e){
+ e.preventDefault();
+
+ if(!cart.length){
+   alert("Please add an item to the cart first.");
+   return;
+ }
+
+ const name=document.getElementById("name").value.trim();
+ const phone=document.getElementById("phone").value.trim();
+ const type=document.getElementById("orderType").value;
+ const address=document.getElementById("address").value.trim();
+ const notes=document.getElementById("notes").value.trim();
+ const total=cart.reduce((sum,x)=>sum+x.price*x.qty,0);
+
+ let items=cart.map(x=>`${x.name} x${x.qty} = ₹${x.price*x.qty}`).join("\n");
+
+ const message=
+ `*NEW ORDER - PIZZA PLACE NAKUR*%0A%0A`+
+ `*Customer:* ${encodeURIComponent(name)}%0A`+
+ `*Mobile:* ${encodeURIComponent(phone)}%0A`+
+ `*Order Type:* ${encodeURIComponent(type)}%0A`+
+ `*Address:* ${encodeURIComponent(address)}%0A%0A`+
+ `*Items:*%0A${encodeURIComponent(items)}%0A%0A`+
+ `*Total:* ₹${total}%0A`+
+ `*Instructions:* ${encodeURIComponent(notes||"None")}`;
+
+ window.open(`https://wa.me/${SHOP_NUMBER}?text=${message}`,"_blank");
+});
+
+showMenu();
+renderCart();
+</script>
+</body>
+</html>
